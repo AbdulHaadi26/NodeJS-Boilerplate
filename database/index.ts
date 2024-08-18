@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize";
 
+let sequelize: Sequelize;
+
 const connectToDB = async () => {
   try {
     if (
@@ -10,7 +12,7 @@ const connectToDB = async () => {
       throw new Error("Missing environment variables");
     }
 
-    const sequelize = new Sequelize(
+    sequelize = new Sequelize(
       process.env.DB_NAME,
       process.env.DB_USER_NAME,
       process.env.DB_PASSWORD,
@@ -30,4 +32,6 @@ const connectToDB = async () => {
   }
 };
 
-export { connectToDB };
+connectToDB();
+
+export { connectToDB, sequelize };
