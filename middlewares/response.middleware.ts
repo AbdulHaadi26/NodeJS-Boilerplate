@@ -4,7 +4,7 @@ declare global {
   namespace Express {
     interface Response {
       success: (data: any, status?: number) => void;
-      error: (status: number, message?: string) => void;
+      error: (status: number, error: any) => void;
     }
   }
 }
@@ -21,7 +21,9 @@ export function responseFormatter(
     });
   };
 
-  res.error = (status: number, message?: string): void => {
+  res.error = (status: number, error: any): void => {
+    console.log(error);
+
     const predefinedMessages: Record<number, string> = {
       401: "Unauthorized",
       500: "Internal Server Error",
@@ -29,7 +31,8 @@ export function responseFormatter(
 
     res.status(status).json({
       status,
-      message: predefinedMessages[status] ?? message ?? "An error occurred",
+      message:
+        predefinedMessages[status] ?? error?.message ?? "An error occurred",
     });
   };
 

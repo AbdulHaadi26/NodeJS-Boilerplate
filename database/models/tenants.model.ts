@@ -1,7 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../database";
-import { EmployeeModel } from "./employees.model";
-import { TeamModel } from "./teams.model";
 
 const TenantModel = sequelize.define<Model>(
   "tenants",
@@ -27,8 +25,5 @@ const TenantModel = sequelize.define<Model>(
     indexes: [{ unique: true, fields: ["tenantId"] }],
   }
 );
-
-TenantModel.hasMany(EmployeeModel, { foreignKey: "tenantId" });
-TenantModel.hasMany(TeamModel, { foreignKey: "tenantId" });
 
 export { TenantModel };

@@ -1,7 +1,5 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../../database";
-import { TenantModel } from "./tenants.model";
-import { EmployeeModel } from "./employees.model";
 
 const TeamModel = sequelize.define<Model>(
   "teams",
@@ -26,9 +24,5 @@ const TeamModel = sequelize.define<Model>(
     indexes: [{ unique: true, fields: ["tenantId", "name"] }],
   }
 );
-
-//Associations
-TeamModel.belongsTo(TenantModel, { foreignKey: "tenantId" });
-TeamModel.belongsToMany(EmployeeModel, { through: "EmployeeTeams" });
 
 export { TeamModel };

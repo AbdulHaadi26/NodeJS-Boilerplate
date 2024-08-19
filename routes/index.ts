@@ -1,12 +1,12 @@
 import { authRouter } from "./auth.route";
-import { userRouter } from "./user.route";
+import { employeeRouter } from "./employee.route";
 import passport from "passport";
 
 const defineRoutes = (app: any) => {
   app.use(
-    `/api/user`,
+    `/api/employees`,
     passport.authenticate("jwt", { session: false }),
-    userRouter
+    employeeRouter
   );
   app.use(`/api/auth`, authRouter);
 };
